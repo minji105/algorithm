@@ -1,4 +1,4 @@
 function solution(s) {
-    const len = s.length;
-    return len % 2 ? s.charAt(len / 2) : s.charAt(len / 2 - 1) + s.charAt(len / 2);
+    const mid = Math.ceil(s.length / 2);
+    return s.substring(mid - 1, s.length % 2 ? mid : mid + 1);
 }
