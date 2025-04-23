@@ -1,11 +1,11 @@
 function solution(s) {
-    var ans = 0;
+    var arr = [];
     for (let c of s) {
-        if (c === '(') ans++;
+        if (c === '(') arr.push(c);
         else {
-            ans--;
-            if (ans < 0) return false
+            if (arr.length === 0) return false;
+            else arr.pop();
         }
     }
-    return ans === 0 ? true : false;
+    return arr.length === 0;
 }
