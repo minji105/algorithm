@@ -1,5 +1,4 @@
 function solution(s, skip, index) {
-    let alp = 'abcdefghijklmnopqrstuvwxyz';
-    skip.split('').forEach(c => alp = alp.replace(c, ''));
-    return s.split('').map(v => alp[(alp.indexOf(v) + index) % alp.length]).join('');
+    let alp = [...'abcdefghijklmnopqrstuvwxyz'].filter(c => !skip.includes(c));
+    return [...s].map(v => alp[(alp.indexOf(v) + index) % alp.length]).join('');
 }
