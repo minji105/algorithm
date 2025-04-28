@@ -1,24 +1,20 @@
 const fs = require("fs");
 const n = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 
-const [_, M] = n[0].split(' ');
+const [N, M] = n[0].split(' ').map(Number);
 const arr = n[1].split(' ').map(Number);
 let count = 0;
 
-// 누적합 나머지 Map
+// 누적합 나머지 배열
 let prefixSum = 0;
-const remainderMap = new Map();
-remainderMap.set(0, 1);
+const remainderCount = new Array(M).fill(0);
+remainderCount[0] = 1;
 
-for (let i = 0; i < arr.length; i++) {
-  prefixSum += arr[i]; // 누적합
-
-  const remainder = prefixSum % M;  // 누적합 나머지
-
-  if (remainderMap.has(remainder))
-    count += remainderMap.get(remainder)  // 나머지가 map에 있으면 나머지 수만큼 count 증가(조합)
-
-  remainderMap.set(remainder, (remainderMap.get(remainder) || 0) + 1);  // 나머지 수 1 증가
+for (let i = 0; i < N; i++) {
+  prefixSum += arr[i];
+  remainderCount[prefixSum % M]++;
 }
+
+remainderCount.forEach(v => count += v * (v - 1) / 2)
 
 console.log(count);
