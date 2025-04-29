@@ -3,7 +3,7 @@ const n = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 
 const [N, M] = n[0].split(' ').map(Number);
 
-const prefix = new Array(N + 1).fill(0).map(v => v = new Array(N + 1).fill(0));
+const prefix = Array.from({ length: N + 1 }, () => new Array(N + 1).fill(0));
 
 for (let i = 1; i <= N; i++) {
   const line = n[i].split(' ').map(Number);
@@ -20,4 +20,4 @@ for (let i = 0; i < M; i++) {
   result.push(prefix[x2][y2] - prefix[x1 - 1][y2] - prefix[x2][y1 - 1] + prefix[x1 - 1][y1 - 1]);
 }
 
-console.log(result.join('\n'));
+process.stdout.write(result.join('\n') + '\n');
