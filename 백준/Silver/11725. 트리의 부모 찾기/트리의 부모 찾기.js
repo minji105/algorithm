@@ -1,10 +1,9 @@
 const fs = require("fs");
 const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 
-const N = Number(input[0]);
-const visited = new Array(N + 1).fill(false);
+const N = +input[0];
 const tree = Array.from({ length: N + 1 }, () => []);
-const result = new Array(N + 1).fill(0);
+const parentArr = new Array(N + 1).fill(0);
 
 for (let i = 1; i < input.length; i++) {
   const [n1, n2] = input[i].split(' ').map(Number);
@@ -14,11 +13,9 @@ for (let i = 1; i < input.length; i++) {
 }
 
 const DFS = (node) => {
-  visited[node] = true;
-
-  for (let next of tree[node]) {
-    if (!visited[next]) {
-      result[next] = node;
+  for(let next of tree[node]) {
+    if(parentArr[next]===0) {
+      parentArr[next] = node;
       DFS(next);
     }
   }
@@ -26,8 +23,4 @@ const DFS = (node) => {
 
 DFS(1);
 
-let output = '';
-for (let i = 2; i <= N; i++) {
-  output += result[i] + '\n';
-}
-console.log(output);
+console.log(parentArr.slice(2).join('\n'));
