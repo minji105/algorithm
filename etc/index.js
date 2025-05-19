@@ -157,5 +157,5 @@ function testDoublyLinkedList() {
 //테스트 하고 싶은 항목 주석 풀고 사용
 
 //testQueue();
-testLinkedList();
-//testDoublyLinkedList();
+//testLinkedList();
+testDoublyLinkedList();
