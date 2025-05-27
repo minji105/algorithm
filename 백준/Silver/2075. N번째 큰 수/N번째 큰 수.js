@@ -79,12 +79,10 @@ class MinHeap {
 
 const heap = new MinHeap();
 let N = -1;
-let n;
 
 rl.on('line', (line) => {
   if (N === -1) {
     N = parseInt(line);
-    n = N;
     return;
   }
   line.split(' ').forEach((value) => {
