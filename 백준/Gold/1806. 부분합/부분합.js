@@ -8,10 +8,9 @@ let [start, end, sum] = [0, 0, arr[0]];
 let minLen = N;
 let isMore = false;
 
-while (start < N) {
+while (end < N) {
   if (sum < S) {
     end++;
-    if (end === N) break;
     sum += arr[end];
   } else {
     minLen = Math.min(minLen, end - start + 1);
