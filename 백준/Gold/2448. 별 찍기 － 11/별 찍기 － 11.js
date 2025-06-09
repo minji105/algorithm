@@ -3,16 +3,7 @@ let N = fs.readFileSync("/dev/stdin").toString().trim() / 1;
 
 const arr = Array.from( { length: N }, () => Array( 2 * N - 1 ).fill( ' ' ) );
 
-const paintStar = ( n ) =>
-{
-  const mid = n - 1;
-
-  star( n, mid, 0 );
-
-  return arr.map( line => line.join( '' ) ).join( '\n' );
-};
-
-const star = ( n, mid, line ) =>
+const paintStar = ( n, mid, line ) =>
 {
   if ( n === 3 )
   {
@@ -23,9 +14,12 @@ const star = ( n, mid, line ) =>
     return;
   }
 
-  star( n / 2, mid, line );
-  star( n / 2, mid - n / 2, line + n / 2 );
-  star( n / 2, mid + n / 2, line + n / 2 );
+  const half = n / 2;
+  paintStar( half, mid, line );
+  paintStar( half, mid - half, line + half );
+  paintStar( half, mid + half, line + half );
 };
 
-console.log( paintStar( N ) );
+paintStar( N, N - 1, 0 );
+
+console.log( arr.map( line => line.join( '' ) ).join( '\n' ) );
