@@ -1,24 +1,19 @@
 function solution(n, w, num) {
     // 홀수줄이면 역순
     
-    const odds = Array(w).fill(1);
-    for (let i = 1; i < w; i++) 
-        odds[i] = odds[i - 1] + 2;
-    const reverseOdds = odds.slice().sort((a, b) => b - a);
-    
-    let isOddRow = Math.floor((num - 1) / w) % 2 ? false : true;
-    let col = (num - 1) % w;
-    let plus = isOddRow ? col : (w - 1 - col);
-    
+    let row = Math.floor((num - 1) / w);
+    const col = row % 2 ? (num - 1) % w : w - 1 - (num - 1) % w;
+
     let nowBox = num;
     let count = 0;
     
     while (nowBox <= n) {
+        const plus = (row % 2 ? w - col - 1 : col) * 2 + 1;
+        nowBox += plus;
         count++;
-        nowBox += isOddRow ? reverseOdds[plus] : odds[plus];
-        isOddRow = !isOddRow;
+        row++;
         
-        console.log(nowBox, plus, isOddRow)
+        console.log(nowBox, plus, col)
     }
     
     return count;
