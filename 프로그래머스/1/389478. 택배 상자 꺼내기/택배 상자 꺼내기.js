@@ -4,16 +4,18 @@ function solution(n, w, num) {
     let row = Math.floor((num - 1) / w);
     const col = row % 2 ? (num - 1) % w : w - 1 - (num - 1) % w;
 
-    let nowBox = num;
+    const A = 2 * col + 1;
+    const B = 2 * (w - col - 1) + 1;
+    
     let count = 0;
+    let nowBox = num;
+    let toggle = row % 2 === 0;
     
     while (nowBox <= n) {
-        const plus = (row % 2 ? w - col - 1 : col) * 2 + 1;
+        const plus = toggle ? A : B;
         nowBox += plus;
         count++;
-        row++;
-        
-        console.log(nowBox, plus, col)
+        toggle = !toggle
     }
     
     return count;
