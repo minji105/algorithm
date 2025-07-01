@@ -1,6 +1,4 @@
 function solution(arr) {
-    arr = arr.sort((a, b) => b - a);
-    
     let result = arr[0];
     for (let i = 1; i < arr.length; i++) {
         result = LCM(result, arr[i]);
