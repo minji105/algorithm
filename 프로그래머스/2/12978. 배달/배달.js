@@ -11,17 +11,20 @@ function solution(N, road, K) {
     }
     console.log(graph);
     
-    const dijkstra = (index, sum) => {
-        for (const [next, cost] of graph[index]) {
-            const total = sum + cost;
+    const queue = [[1, 0]];
+    
+    while (queue.length > 0) {
+        const [cur, curCost] = queue.shift();
+        
+        for (const [next, cost] of graph[cur]) {
+            const total = curCost + cost;
             
             if (total < distance[next]) {
                 distance[next] = total;
-                dijkstra(next, total);
+                queue.push([next, total]);
             }
         }
     }
-    dijkstra(1, 0);
     
     return distance.filter(v => v <= K).length;
 }
