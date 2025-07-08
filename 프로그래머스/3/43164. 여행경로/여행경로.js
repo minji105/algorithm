@@ -9,6 +9,7 @@ function solution(tickets) {
         route[from].sort();
         visited[from] = Array.from({length: route[from].length}, () => 0);
     }
+    console.log(route);
     console.log(visited);
     
     const total = tickets.length;
