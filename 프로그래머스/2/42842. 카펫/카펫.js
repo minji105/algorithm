@@ -4,7 +4,6 @@ function solution(b, y) {
     let col = rowCol - row;
     
     while (row * col !== y) {
-        console.log('row', row, ', col', col)
         row++;
         col--;
     }
