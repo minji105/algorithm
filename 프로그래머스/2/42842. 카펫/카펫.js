@@ -1,9 +1,10 @@
 function solution(b, y) {
-    const rowCol = b / 2 - 2;   // b/2+1-3
+    const rowCol = b / 2 - 2;  
     let row = 1;
     let col = rowCol - row;
     
     while (row * col !== y) {
+        console.log('row', row, ', col', col)
         row++;
         col--;
     }
