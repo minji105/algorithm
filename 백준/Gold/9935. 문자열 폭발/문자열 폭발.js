@@ -8,10 +8,8 @@ const stack = [];
 for (const c of str) {
   stack.push(c);
 
-  if (stack.length >= bombLen) {
-    if (stack.slice(-bombLen).join('') === bomb) {
-      stack.length -= bombLen;
-    }
+  if (stack.length >= bombLen && stack.slice(-bombLen).join('') === bomb) {
+    stack.length -= bombLen;
   }
 }
 
