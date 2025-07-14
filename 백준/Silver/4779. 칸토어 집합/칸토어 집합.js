@@ -9,13 +9,10 @@ const cantor = (n) => {
   return cantor(n - 1) + ' '.repeat(Math.pow(3, n - 1)) + cantor(n - 1);
 };
 
-const result = [];
-let i = 0;
+let result = '';
 
-while (i < input.length) {
-  const N = input[i++];
-
-  result.push(cantor(N));
+for (const N of input) {
+  result += (cantor(N)) + '\n';
 }
 
-console.log(result.join('\n'));
+console.log(result);
