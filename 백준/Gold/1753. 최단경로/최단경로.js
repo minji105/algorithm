@@ -22,24 +22,8 @@ class MinHeap {
     this.heap = [];
   }
 
-  push([node, cost]) {
-    this.heap.push([node, cost]);
-    this._bubbleUp();
-  }
-
-  pop() {
-    if (this.heap.length === 1) {
-      return this.heap.pop();
-    }
-
-    const top = this.heap[0];
-    this.heap[0] = this.heap.pop();
-    this._bubbleDown();
-
-    return top;
-  }
-
-  _bubbleUp() {
+  push(node) {
+    this.heap.push(node);
     let index = this.heap.length - 1;
 
     while (index > 0) {
@@ -52,28 +36,36 @@ class MinHeap {
     }
   }
 
-  _bubbleDown() {
-    let index = 0;
+  pop() {
+    const top = this.heap[0];
+    const end = this.heap.pop();
     const len = this.heap.length;
 
-    while (true) {
-      const left = 2 * index + 1;
-      const right = 2 * index + 2;
-      let smallest = index;
+    if (len) {
+      this.heap[0] = end;
+      let index = 0;
 
-      if (left < len && this.heap[left][1] < this.heap[smallest][1]) {
-        smallest = left;
+      while (true) {
+        const left = 2 * index + 1;
+        const right = 2 * index + 2;
+        let smallest = index;
+
+        if (left < len && this.heap[left][1] < this.heap[smallest][1]) {
+          smallest = left;
+        }
+
+        if (right < len && this.heap[right][1] < this.heap[smallest][1]) {
+          smallest = right;
+        }
+
+        if (smallest === index) break;
+
+        [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+        index = smallest;
       }
-
-      if (right < len && this.heap[right][1] < this.heap[smallest][1]) {
-        smallest = right;
-      }
-
-      if (smallest === index) break;
-
-      [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
-      index = smallest;
     }
+
+    return top;
   }
 
   isEmpty() {
@@ -99,5 +91,4 @@ while (!heap.isEmpty()) {
   }
 }
 
-distance = distance.map(v => v === Infinity ? 'INF' : v);
-console.log(distance.slice(1).join('\n'));
+console.log(distance.slice(1).map(v => v === Infinity ? 'INF' : v).join('\n'));
