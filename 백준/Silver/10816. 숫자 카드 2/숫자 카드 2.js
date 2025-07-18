@@ -4,9 +4,9 @@ let input = fs.readFileSync("/dev/stdin").toString().trim().split('\n');
 const cards = input[1].split(' ').map(Number).sort((a, b) => a - b);
 const arrM = input[3].split(' ').map(Number);
 
-const map = {};
+const map = new Map();
 for (const n of cards) {
-  map[n] = map[n] ? map[n] + 1 : 1;
+  map.set(n, (map.get(n) || 0) + 1);
 }
 
 const bn = (arr, tg) => {
@@ -19,7 +19,7 @@ const bn = (arr, tg) => {
       pr = pc - 1;
     } else if (tg > arr[pc]) {
       pl = pc + 1;
-    } else return map[tg];
+    } else return map.get(tg);
   }
 
   return 0;
