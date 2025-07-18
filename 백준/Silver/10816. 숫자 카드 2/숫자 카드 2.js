@@ -9,25 +9,9 @@ for (const n of cards) {
   map.set(n, (map.get(n) || 0) + 1);
 }
 
-const bn = (arr, tg) => {
-  let pl = 0;
-  let pr = arr.length - 1;
-
-  while (pl <= pr) {
-    let pc = Math.floor((pl + pr) / 2);
-    if (tg < arr[pc]) {
-      pr = pc - 1;
-    } else if (tg > arr[pc]) {
-      pl = pc + 1;
-    } else return map.get(tg);
-  }
-
-  return 0;
-};
-
 const result = [];
 for (const n of arrM) {
-  result.push(bn(cards, n));
+  result.push(map.get(n) || 0);
 }
 
 console.log(result.join(' '));
